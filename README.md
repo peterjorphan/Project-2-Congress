@@ -1,12 +1,15 @@
 # Project-2-Congress
 
 Project 2 – How has Congress aged between 1995 to present?
+
 Team Members: Adam Feldstein, Brendan Donnelly, Renee O'Reilly, Peter Orphan
+
 Dataset: https://www.propublica.org/datastore/api/propublica-congress-api
        Possible Dataset: coordinates for states
 Inspiration: Current political atmosphere 
+
 MetaData:
-![Metadata](/json.png)
+![json](/json.png)
 
 
 
