@@ -8,17 +8,10 @@ Dataset: https://www.propublica.org/datastore/api/propublica-congress-api
        Possible Dataset: coordinates for states
 Inspiration: Current political atmosphere 
 
-MetaData:
-![json](https://github.com/peterjorphan/Project-2-Congress/master/json.png)
-
-
-
 Visuals: 
 Line chart that spans 1995 through 2019.  Filter by state, political party, House/Senate.  Possible: click on state on full US map and filter by state information. 
 Full US map – states outlined and ability to do clickable events, take average age and vary color by age
 Bar chart – average age of Congress by state, filter by year.
-
-
 
 Variables:
        Title
@@ -29,3 +22,4 @@ Variables:
        party
        state
 
+Images located in Inspiration Images folder - Json = Metadata, all others are possible charts
