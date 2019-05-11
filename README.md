@@ -9,7 +9,7 @@ Dataset: https://www.propublica.org/datastore/api/propublica-congress-api
 Inspiration: Current political atmosphere 
 
 MetaData:
-![json](/json.png)
+![json](https://github.com/peterjorphan/Project-2-Congress/blob/master/json.png)
 
 
 
