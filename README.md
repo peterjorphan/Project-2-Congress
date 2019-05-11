@@ -6,7 +6,7 @@ Dataset: https://www.propublica.org/datastore/api/propublica-congress-api
        Possible Dataset: coordinates for states
 Inspiration: Current political atmosphere 
 MetaData:
-![Metadata](/json.pgn)
+![Metadata](/json.png)
 
 
 
