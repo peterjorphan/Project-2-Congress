@@ -10,18 +10,10 @@ headers = {
 
 for i in range(104, 116):
     baseURL = f"https://api.propublica.org/congress/v1/{i}/senate/members.json"
-    
+
     response = requests.get(baseURL, headers=headers).json()
-    
-    print(response["status"])
-    print(response["results"][0]["congress"])
-    print(response["results"][0]["members"][90])
 
 for i in range(104, 115):
     baseURL = f"https://api.propublica.org/congress/v1/{i}/house/members.json"
-    
+
     response = requests.get(baseURL, headers=headers).json()
-    
-    print(response["status"])
-    print(response["results"][0]["congress"])
-    print(response["results"][0]["members"][90])
