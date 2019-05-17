@@ -23,3 +23,8 @@ Variables:
        state
 
 Images located in Inspiration Images folder - Json = Metadata, all others are possible charts
+<br>![](inspiration%20images/congress_api_preview.JPG)
+<br>![](inspiration%20images/age%20barchart.png)
+<br>![](inspiration%20images/age%20barchart2.png)
+<br>![](inspiration%20images/heatmap.png)
+<br>![](inspiration%20images/line_chart_with_dropdown.png)
