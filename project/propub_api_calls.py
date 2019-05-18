@@ -28,7 +28,7 @@ for chamber in ['senate', 'house']:
     
     # repeat for each different congress
     
-    for i in range(104, 116):
+    for i in range(104, 117):
         baseURL = f"https://api.propublica.org/congress/v1/{i}/{chamber}/members.json"
 
         response = requests.get(baseURL, headers=headers).json()
@@ -77,7 +77,7 @@ for i in range(0, len(members_list)):
 
 # create database table, if it doesn't already exist
 
-engine = create_engine('sqlite:///db_congress.db')
+engine = create_engine('sqlite:///db/db_congress.db')
 
 Base = declarative_base()
  
