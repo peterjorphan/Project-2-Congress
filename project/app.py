@@ -29,27 +29,62 @@ Base.prepare(db.engine, reflect=True)
 # Save references to each table
 Members_Metadata = Base.classes.members
 
+# def create_app():
+
+#     with app.app_context():
+#         app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///db/db_congress.db"
+#         db = SQLAlchemy(app)
+
+#         # reflect an existing database into a new model
+#         Base = automap_base()
+#         # reflect the tables
+#         Base.prepare(db.engine, reflect=True)
+
+#         # Save references to each table
+#         Members_Metadata = Base.classes.members
+#         # init_db()
+
+#     return app
+
+# create_app()
+
+
+# @app.route("/<state>")
 def line(state):
     stmt = db.session.query(Members_Metadata).statement
     df = pd.read_sql_query(stmt, db.session.bind)
     
-    df_grouped = df['SwornInAge'].groupby([df['State'], df['Year']])
-    df_filtered = df_grouped
-    df_all = df['SwornInAge'].groupby(df['Year'])
+    # Filter the data for the states selected
+#     df_filtered = pd.DataFrame()
+    
+    df_filtered = df.loc[df['State'] == state].reset_index()
+        
+    # Group the dataframes
+    df_filtered_grouped = df_filtered['SwornInAge'].groupby(df_filtered['Year'])
+    df_grouped = df['SwornInAge'].groupby(df['Year'])
+    df_ByState = df['SwornInAge'].groupby([df['State'], df['Year']])
+#     d = df_filtered_grouped.mean().unstack()
 
-    # Filter the data based on the sample number and
-    # only keep rows with values above 1
-#     sample_data = df.loc[df[sample] > 1, ["otu_id", "otu_label", sample]]
     # Format the data to send as json
-#     data = {
-#         "Year": df.Year.values.tolist(),
-#         "SwornInAge": df.SwornInAge.values.tolist(),
-#         "State": df.State.values.tolist(),
-#     }
-    print(df_all.mean())
-    print(df_grouped.mean())
-#     print(data)
-#     return jsonify(data)
+    data = {
+        "Year": list(df_filtered_grouped.groups.keys()),
+        "AverageAge": list(df_filtered_grouped.mean()), 
+        "AverageTotal": list(df_grouped.mean())
+    }
+    
+#     for index, row in d.iterrows():
+#         data = {
+# #             "State": [index],
+#             "Year": list(d.columns),
+#             "AverageAge": list(row)
+#         }
+
+    print (df_filtered_grouped.mean())
+    print(data)
+#     print(df_ByState.mean())
+
+    return jsonify(data)
+    # return data
 line('MO')
 
 # @app.route("/")
@@ -118,5 +153,6 @@ line('MO')
 #     return jsonify(data)
 
 
-# if __name__ == "__main__":
-#     app.run()
+if __name__ == "__main__":
+    with app.app_context():
+        app.run()
