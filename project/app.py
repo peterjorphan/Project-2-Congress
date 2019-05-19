@@ -49,7 +49,7 @@ Members_Metadata = Base.classes.members
 # create_app()
 
 
-# @app.route("/<state>")
+@app.route("/line/<state>")
 def line(state):
     stmt = db.session.query(Members_Metadata).statement
     df = pd.read_sql_query(stmt, db.session.bind)
@@ -85,7 +85,9 @@ def line(state):
 
     return jsonify(data)
     # return data
-line('MO')
+
+with app.app_context():
+    line('MO')
 
 # @app.route("/")
 # def index():
@@ -154,5 +156,4 @@ line('MO')
 
 
 if __name__ == "__main__":
-    with app.app_context():
-        app.run()
+    app.run()
