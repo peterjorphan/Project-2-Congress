@@ -1,0 +1,32 @@
+body {
+    font-family: Arial;
+    margin: 0;
+  }
+  
+  .header {
+    padding: 5px;
+    text-align: center;
+    background: #090cda;
+    color: white;
+  }
+
+  .row {  
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  #box {
+    background-color: #f1f1f1;
+    padding: 30px;
+  }
+
+  #selected{
+    border: 5px solid;
+    border-color: #d10808;
+}
+
+@media screen and (max-width: 700px) {
+    .row{   
+      flex-direction: column;
+    }
+  }
