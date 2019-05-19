@@ -48,6 +48,10 @@ Members_Metadata = Base.classes.members
 
 # create_app()
 
+@app.route("/")
+def index():
+    """Return the homepage."""
+    return render_template("index.html")
 
 @app.route("/line/<state>")
 def line(state):
@@ -89,10 +93,7 @@ def line(state):
 with app.app_context():
     line('MO')
 
-# @app.route("/")
-# def index():
-#     """Return the homepage."""
-#     return render_template("index.html")
+
 
 
 # @app.route("/names")
