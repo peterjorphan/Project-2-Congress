@@ -62,7 +62,7 @@ def line(state):
 #     df_filtered = pd.DataFrame()
     
     df_filtered = df.loc[df['State'] == state].reset_index()
-        
+    
     # Group the dataframes
     df_filtered_grouped = df_filtered['SwornInAge'].groupby(df_filtered['Year'])
     df_grouped = df['SwornInAge'].groupby(df['Year'])
@@ -115,15 +115,15 @@ def map(year):
     }
     
 
-    print (df_filtered_grouped.mean())
+    # print(df_filtered_grouped.mean())
     #print(data)
 #     print(df_ByState.mean())
 
     return jsonify(data)
     # return data
 
-with app.app_context():
-    map(2019)   
+# with app.app_context():
+#     map(2019)
 
 # @app.route("/names")
 # def names():
