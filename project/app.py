@@ -94,7 +94,36 @@ with app.app_context():
     line('MO')
 
 
+@app.route("/map/<year>")
+def map(year):
+    stmt = db.session.query(Members_Metadata).statement
+    df = pd.read_sql_query(stmt, db.session.bind)
+    
+    # Filter the data for the states selected
+#     df_filtered = pd.DataFrame()
+    
+    df_filtered = df.loc[df['Year'] == year].reset_index()
+        
+    # Group the dataframes
+    df_filtered_grouped_State = df_filtered['SwornInAge'].groupby(df_filtered['State'])
+   
+#     d = df_filtered_grouped.mean().unstack()
 
+    # Format the data to send as json
+    data = {
+        "Year": list(df_filtered_grouped_State),
+    }
+    
+
+    print (df_filtered_grouped.mean())
+    #print(data)
+#     print(df_ByState.mean())
+
+    return jsonify(data)
+    # return data
+
+with app.app_context():
+    map(2019)   
 
 # @app.route("/names")
 # def names():
