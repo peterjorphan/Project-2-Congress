@@ -127,36 +127,29 @@ def bar(year):
 
     return jsonify(data)
 
-@app.route("/map/<year>")
+@app.route("/map/<int:year>")
 def map(year):
-    stmt = db.session.query(Members_Metadata).statement
-    df = pd.read_sql_query(stmt, db.session.bind)
-    
-    # Filter the data for the states selected
-#     df_filtered = pd.DataFrame()
-    
-    df_filtered = df.loc[df['Year'] == year].reset_index()
-        
-    # Group the dataframes
-    df_filtered_grouped_State = df_filtered['SwornInAge'].groupby(df_filtered['State'])
-   
-#     d = df_filtered_grouped.mean().unstack()
+   stmt = db.session.query(Members_Metadata).statement
+   df = pd.read_sql_query(stmt, db.session.bind)
 
-    # Format the data to send as json
-    data = {
-        "Year": list(df_filtered_grouped_State),
-    }
-    
+   # Filter the data for the states selected
 
-    # print(df_filtered_grouped.mean())
-    #print(data)
-#     print(df_ByState.mean())
+   df_filtered = df.loc[df['Year'] == year].reset_index()
 
-    return jsonify(data)
-    # return data
+   # Group the dataframes
+   df_filtered_grouped_State = df_filtered['SwornInAge'].groupby(df_filtered['State'])
 
-# with app.app_context():
-#     map(2019)
+   # Format the data to send as json
+   datastate = {
+       "State": list(df_filtered_grouped_State.groups.keys()),
+       "AverageAge": list(df_filtered_grouped_State.mean())
+   }
+
+   return jsonify(datastate)
+#     return datastate
+with app.app_context():
+   map(2019)
+
 
 # @app.route("/names")
 # def names():
