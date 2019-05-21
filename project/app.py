@@ -29,25 +29,6 @@ Base.prepare(db.engine, reflect=True)
 # Save references to each table
 Members_Metadata = Base.classes.members
 
-# def create_app():
-
-#     with app.app_context():
-#         app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///db/db_congress.db"
-#         db = SQLAlchemy(app)
-
-#         # reflect an existing database into a new model
-#         Base = automap_base()
-#         # reflect the tables
-#         Base.prepare(db.engine, reflect=True)
-
-#         # Save references to each table
-#         Members_Metadata = Base.classes.members
-#         # init_db()
-
-#     return app
-
-# create_app()
-
 @app.route("/")
 def index():
     """Return the homepage."""
@@ -127,28 +108,33 @@ def bar(year):
 
     return jsonify(data)
 
+# with app.app_context():
+#     bar(2019)
+
+
 @app.route("/map/<int:year>")
 def map(year):
-   stmt = db.session.query(Members_Metadata).statement
-   df = pd.read_sql_query(stmt, db.session.bind)
+    stmt = db.session.query(Members_Metadata).statement
+    df = pd.read_sql_query(stmt, db.session.bind)
 
-   # Filter the data for the states selected
+    # Filter the data for the states selected
 
-   df_filtered = df.loc[df['Year'] == year].reset_index()
+    df_filtered = df.loc[df['Year'] == year].reset_index()
 
-   # Group the dataframes
-   df_filtered_grouped_State = df_filtered['SwornInAge'].groupby(df_filtered['State'])
+    # Group the dataframes
+    df_filtered_grouped_State = df_filtered['SwornInAge'].groupby(df_filtered['State'])
 
-   # Format the data to send as json
-   datastate = {
-       "State": list(df_filtered_grouped_State.groups.keys()),
-       "AverageAge": list(df_filtered_grouped_State.mean())
-   }
+    # Format the data to send as json
+    datastate = {
+        "State": list(df_filtered_grouped_State.groups.keys()),
+        "AverageAge": list(df_filtered_grouped_State.mean())
+    }
 
-   return jsonify(datastate)
-#     return datastate
-with app.app_context():
-   map(2019)
+    return jsonify(datastate)
+
+
+# with app.app_context():
+#    map(2019)
 
 
 # @app.route("/names")
