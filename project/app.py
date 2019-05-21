@@ -132,6 +132,31 @@ def map(year):
 
     return jsonify(datastate)
 
+@app.route("/states")
+def states():
+    stmt = db.session.query(Members_Metadata).statement
+    df = pd.read_sql_query(stmt, db.session.bind)
+    
+    df_groupby = df.groupby(["State"])
+    
+    data = {
+        "State": list(df_groupby.groups.keys()),
+    }
+    
+    return jsonify(data)
+
+@app.route("/years")
+def years():
+    stmt = db.session.query(Members_Metadata).statement
+    df = pd.read_sql_query(stmt, db.session.bind)
+    
+    df_groupby = df.groupby(["Year"])
+    
+    data = {
+        "Year": list(df_groupby.groups.keys()),
+    }
+    
+    return jsonify(data)
 
 # with app.app_context():
 #    map(2019)
