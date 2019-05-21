@@ -90,9 +90,42 @@ def line(state):
     return jsonify(data)
     # return data
 
-with app.app_context():
-    line('MO')
+# with app.app_context():
+#     line('MO')
 
+@app.route("/bar/<int:year>")
+def bar(year):
+    stmt = db.session.query(Members_Metadata).statement
+    df = pd.read_sql_query(stmt, db.session.bind)
+    
+    # Filter the data for the year selected
+    
+    df_filtered = df.loc[df['Year'] == year].reset_index()
+        
+    # Group the dataframes
+    df_filtered_grouped = df_filtered['SwornInAge'].groupby(df_filtered['State'])
+    df_grouped = df['SwornInAge'].groupby(df['State'])
+    df_ByYear = df['SwornInAge'].groupby([df['Year'], df['State']])
+    df_filtered_party = df_filtered['Party'].groupby(df_filtered['State'])
+    
+    # Get Majority Party for each State
+
+    df_party = df_filtered_party.value_counts().reset_index(name='count')
+
+    df_pivot = df_party.pivot(index='State', columns='Party', values='count')
+
+    df_pivot = df_pivot.fillna(0)
+
+    df_pivot['Majority'] = np.where(df_pivot['D']> df_pivot["R"], 'D', 'R')
+
+    # Format the data to send as json
+    data = {
+        "State": list(df_filtered_grouped.groups.keys()),
+        "AverageAge": list(df_filtered_grouped.mean()), 
+        "Party": df_pivot.Majority.values.tolist()
+    }
+
+    return jsonify(data)
 
 @app.route("/map/<year>")
 def map(year):
