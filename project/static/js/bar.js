@@ -5,8 +5,8 @@ function buildBar(year) {
     d3.json(sampleURL).then(function(data){
         //     // @TODO: Build a Bubble Chart using the sample data
         d3.select("#bar").html("")
-        var colors = {'D': 'rgb(228, 241, 254)',
-                'R': 'rgb(241, 169, 160)',
+        var colors = {'D': 'rgb(0,0,255)',
+                'R': 'rgb(255,0,0)',
         }
         var barData = [{
         x: data.State,
