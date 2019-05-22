@@ -26,8 +26,14 @@
                         <p>Use the interactive charts below to explore the dataset</p>
                 </div>
             </div>
-        <div class="row row-grid">
-            <div class="col-12">
+        <div class="row row-grid" id="box">
+            <div class="col-md-1">
+                    <div class="well">
+                    <h5>State:</h5>
+                    <select id="selState" onchange="optionChanged(this.value)"></select>
+                    </div>
+                </div>
+            <div class="col-11">
                 <div id="box">
                     <div id="line">
                         <a href="line/AK">line (AK)</a><br>
@@ -35,9 +41,15 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row row-grid">
-            <div class="col-12">
+            </div>
+        <div class="row row-grid" id="box">
+            <div class="col-md-1">
+                    <div class="well">
+                    <h5>Year:</h5>
+                    <select id="selYear" onchange="optionChanged(this.value)"></select>
+                    </div>
+                </div>
+            <div class="col-11">
                 <div id="box">
                     <div id="bar">
                         <a href="bar/2019">bar (2019)</a><br>
@@ -45,8 +57,8 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
+            </div>
+        <div class="row row-grid" id="box">
             <div class="col-12">
                 <div id="box">
                     <div id="map">
