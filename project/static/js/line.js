@@ -15,21 +15,35 @@ function buildLine(state) {
           marker: {
             // size: sampleData.sample_values, 
             color: 'black'
-          }
+          },
+          name: "US" 
         };
-  
-        var response = [trace1];
+
+        var trace2 = {
+          x: lineData.Year,
+          y: lineData.AverageAge,
+          mode: 'lines+markers',
+          type: 'scatter',
+          text: lineData.Year,
+          marker: {
+            // size: sampleData.sample_values, 
+            color: 'orange'
+          },
+          name: state
+        };
+
+        var response = [trace1, trace2];
         console.log(response)
         var layout = {
             xaxis: {title: "Congress Year"},
             yaxis: {title: "Average Age"}
-        };
+            };
   
         Plotly.newPlot('line', response, layout, {responsive: true});
     });
 }
 
-buildLine('AK')
+buildLine('MO')
 // function init() {
 //     // Grab a reference to the dropdown select element
 //     var selector = 'AK'
