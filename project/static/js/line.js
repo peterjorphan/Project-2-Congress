@@ -1,8 +1,9 @@
 function buildLine(state) {
-
+  console.log(state)
     // @TODO: Use `d3.json` to fetch the sample data for the plots
     d3.json(`/line/${state}`).then((lineData) => {
-  
+      
+      console.log(lineData)
       // @TODO: Build a Bubble Chart using the sample data
       d3.select("#line").html("")
         var trace1 = {
@@ -13,18 +14,21 @@ function buildLine(state) {
           text: lineData.Year,
           marker: {
             // size: sampleData.sample_values, 
-            color: black
+            color: 'black'
           }
         };
   
         var response = [trace1];
-
+        console.log(response)
         var layout = {
             xaxis: {title: "Congress Year"},
             yaxis: {title: "Average Age"}
-        }
+        };
   
-        Plotly.newPlot('#line', response, layout, {responsive: true});
+        Plotly.newPlot('line', response, layout, {responsive: true});
+    });
+}
+
 buildLine('AK')
 // function init() {
 //     // Grab a reference to the dropdown select element
@@ -87,7 +91,3 @@ buildLine('AK')
     //     var pieData = [trace2];
   
     //     Plotly.newPlot("pie", pieData, {responsive: true});
-  
-      });
-  
-  }
