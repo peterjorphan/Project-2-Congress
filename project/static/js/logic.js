@@ -61,7 +61,7 @@ map.on('load', function () {
 
         new mapboxgl.Popup()
             .setLngLat(e.lngLat)
-            .setHTML(`${AgeData.AverageAge[stateIndex].toFixed(2)} ${AgeData.State[stateIndex]}`)
+            .setHTML(`State: ${AgeData.State[stateIndex]}<br>Average Age: ${AgeData.AverageAge[stateIndex].toFixed(2)}`)
             .addTo(map);
     });
 
