@@ -36,7 +36,7 @@ function buildLine(state = 'AK') {
         var layout = {
             xaxis: { title: "Congress Year" },
             yaxis: { title: "Average Age" },
-            width: 1000,
+            width: 1019,
         };
 
         Plotly.newPlot('line', response, layout, { responsive: true });
@@ -70,7 +70,7 @@ function buildBar(year = 1995) {
             showlegend: false,
             xaxis: { title: "States and Territories" },
             yaxis: { title: "Average Age" },
-            width: 1000,
+            width: 1019,
             title: {
                 display: true,
                 text: year
