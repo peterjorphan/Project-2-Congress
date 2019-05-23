@@ -1,5 +1,4 @@
 function buildLine(state) {
-  console.log(state)
     // @TODO: Use `d3.json` to fetch the sample data for the plots
     d3.json(`/line/${state}`).then((lineData) => {
       
