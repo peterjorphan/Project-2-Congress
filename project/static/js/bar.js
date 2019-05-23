@@ -19,11 +19,12 @@ function buildBar(year) {
 
         var layout = {
         showlegend: false,
-        height: 600,
-        width: 1000
+        xaxis: {title: "States and Territories"},
+        yaxis: {title: "Average Age"},
+        width: 1000,
         };
 
-        Plotly.newPlot('bar', barData, layout);
+        Plotly.newPlot('bar', barData, layout, {responsive: true});
     });
 };
 

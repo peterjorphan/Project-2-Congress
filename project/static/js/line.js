@@ -36,7 +36,8 @@ function buildLine(state) {
         console.log(response)
         var layout = {
             xaxis: {title: "Congress Year"},
-            yaxis: {title: "Average Age"}
+            yaxis: {title: "Average Age"},
+            width: 1000,
             };
   
         Plotly.newPlot('line', response, layout, {responsive: true});
