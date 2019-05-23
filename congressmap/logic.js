@@ -1,10 +1,10 @@
-var AgeData = null;
-$.ajax({
-    url: "datatoreplace.json",
-    success: (data) => {
-        AgeData = data;
-    }
-  });
+var AgeData = "http://127.0.0.1:5000/map/2019";
+// $.ajax({
+//     url: "map/2019",
+//     success: (data) => {
+//         AgeData = data;
+//     }
+//   });
 
 // Creating map object
 // var map = L.map("map", {
@@ -35,7 +35,7 @@ map.addLayer({
 'type': 'fill',
 'source': {
 'type': 'geojson',
-'data': './states.geojson'
+'data': 'http://127.0.0.1:5000/static/js/states.geojson'
 },
 'paint': {
 'fill-color': 'rgba(200, 100, 240, 0.4)',
@@ -47,10 +47,11 @@ map.addLayer({
 // location of the click, with description HTML from its properties.
 map.on('click', 'states-layer', function (e) {
     console.log("clicked",e)
-    let stateIndex = AgeData.State.findIndex((state) => { return (state.trim().toLowerCase() === e.features[0].properties.postal.toLowerCase().replace('.', '').replace(' ', '')); });
+    let stateIndex = e.features[0].properties.postal //AgeData.State.findIndex(false);
+        // (state) => { return (state.trim().toLowerCase() === e.features[0].properties.postal.toLowerCase().replace('.', '').replace(' ', '')); });
 new mapboxgl.Popup()
 .setLngLat(e.lngLat)
-.setHTML(`${e.features[0].properties.name} ${AgeData.AverageAge[stateIndex]}`)
+.setHTML(`${AgeData["AverageAge"][stateIndex]} ${AgeData["State"][stateIndex]}`)
 .addTo(map);
 });
  
