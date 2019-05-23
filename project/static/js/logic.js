@@ -1,4 +1,4 @@
-var AgeData = "/map/2019";
+var AgeData = "map/2019";
 // $.ajax({
 //     url: "map/2019",
 //     success: (data) => {
@@ -53,11 +53,12 @@ map.on('load', function () {
     // location of the click, with description HTML from its properties.
     map.on('click', 'states-layer', function (e) {
         console.log("clicked", e)
-        let stateIndex = AgeData["State"].findIndex(e.features[0].properties.postal);
+        let stateIndex = AgeData.State.findIndex((state) => {
+            return (state.trim().toLowerCase() === e.features[0].properties.postal.toLowerCase().replace('.', '').replace(' ', '')); });
         // (state) => { return (state.trim().toLowerCase() === e.features[0].properties.postal.toLowerCase().replace('.', '').replace(' ', '')); });
         new mapboxgl.Popup()
             .setLngLat(e.lngLat)
-            .setHTML(`${AgeData["AverageAge"][stateIndex]} ${AgeData["State"][stateIndex]}`)
+            .setHTML(`${e.features[0].properties.name} ${AgeData.AverageAge[stateIndex]}`)
             .addTo(map);
     });
 
